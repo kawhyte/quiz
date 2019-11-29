@@ -68,7 +68,18 @@ getNewQuestion= ()=>{
       availableQuesions.splice(questionIndex, 1);
       console.log(availableQuesions);
       acceptingAnswers = true;
-
+      
+      choices.forEach(choice => {
+        choice.addEventListener("click", e => {
+          if (!acceptingAnswers) return;
+      
+          acceptingAnswers = false;
+          const selectedChoice = e.target;
+          const selectedAnswer = selectedChoice.dataset["number"];
+          console.log(selectedAnswer);
+          getNewQuestion();
+        });
+      });
 }
 
 startGame();
